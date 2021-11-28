@@ -8,7 +8,7 @@ import { AppStateProvider } from './AppStateContext';
 ReactDOM.render(
   <AppStateProvider>
     <App />
-  </AppStateProvider>
+  </AppStateProvider>,
   document.getElementById('root')
 );
 
