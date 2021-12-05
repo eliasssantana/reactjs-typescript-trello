@@ -7,17 +7,27 @@ import Card from "./Card"
 interface ColumnProps {
     text: string
     index: number
+    id: string
 }
-export const Column = ({ text, index }: ColumnProps) => {
+export const Column = ({ text, index , id}: ColumnProps) => {
 
-    const {state} = useAppState()
-     return ( 
-        <ColumnContainer> 
-            <ColumnTitle>{text}</ColumnTitle> 
-            {state.lists[index].tasks.map(task => (
-                <Card text={task.text} key={task.id}/>
-            ))}
-            <AddNewItem toggleButtonText='+ Add another task' onAdd={console.log} dark/>
-        </ColumnContainer> 
-        ) 
+    const { state, dispatch } = useAppState()
+    
+    return (
+    
+    <ColumnContainer>
+    
+        <ColumnTitle> {text}</ColumnTitle>
+
+        {state.lists[index].tasks.map((task, i) => (
+            <Card text={task.text} key={task.id} index={i} />
+        ))}
+        <AddNewItem toggleButtonText="+ Add another card" onAdd={(text) => dispatch({ type: "ADD_TASK", payload: { text, taskId: id } })} dark/>
+    
+    </ColumnContainer>
+    
+    )
+    
 }
+    
+    
